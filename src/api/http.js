@@ -5,7 +5,9 @@ import {
 } from '@js/interaction'
 import tools from '@js/tools'
 import store from '@store'
-import {wxRequest} from '@/wx/index'
+import {
+  wxRequest
+} from '@/wx/index'
 const baseURL = process.env.API_BASE_URL
 
 // token 之后另外处理 -----------------
@@ -78,16 +80,16 @@ const http = {
       showLoading()
       console.log('请求前', params)
       wxRequest(params)
-      .then(res => {
-        resolve(res)
-      })
-      .catch(err => {
-        toast('请求失败')
-        reject(err)
-      })
-      .finally(() => {
-        hideLoading()
-      })
+        .then(res => {
+          resolve(res)
+        })
+        .catch(err => {
+          toast('请求失败')
+          reject(err)
+        })
+        .finally(() => {
+          hideLoading()
+        })
     })
   },
 }

@@ -138,18 +138,18 @@ Vue.use(common)
 
 - 在 `src/common.js` 定义，直接定义全局变量或方法（只适合vue文件），然后在vue文件中全局使用即可
 
-- 使用 `localStorage` 存放持久数据（vue和js文件均可）
+- 使用 `wx.setStorage({key:"key", data:"value" })` 存放持久数据（vue和js文件均可）
 
 **页面路由跳转及参数传递？**
 - 路由跳转：使用小程序原生路由跳转方法，先在根文件app.json中定义路由路径，然后在页面中可以使用 `<navigator>` 标签跳转，也可以使用js方法跳转 `wx.navigateTo  wx.redirectTo  wx.navigateBack  wx.switchTab  wx.reLaunch` 。
 
-- 给跳转目标页面传递参数：直接在url后面通过查询参方式传递参数，然后在目标页面的onLoad(options)生命周期中获取参数；使用vuex；使用localStorage。
+- 给跳转目标页面传递参数：直接在url后面通过查询参方式传递参数，然后在目标页面的onLoad(options)生命周期中获取参数；使用vuex；使用 `wx.setStorage({key:"key", data:"value" })` 。
 
 - 返回上一页传递当前页数据
 跳转前在 `wx.navigatorTo({url, events})` events定义监听更改本页面数据方法，如： `events: {test(age) { this.setData({age: 18}); console.log(age) }}` 然后在目标页面 `const eventChannel = this.$mp.page.getOpenerEventChannel();  eventChannel.emit('test', 18);` 合适的地方进行更改即可。
 直接在目标页通过getCurrentPages获取历史栈更改数据，`let pages = getCurrentPages();  let prePage = pages[pages.length - 2];  prePage.setData({ age: 18 }); ` 。
 通过vuex 。
-通过localStorage 。
+通过 `wx.setStorage({key:"key", data:"value" })` 。
 
 
 
